@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello world</h1>
+    {% if user.user.is_authenticated %}
+    <p>{{user.nickname}}님 반갑습니다</p>
+    <a href="{% url 'post' %}"><button>글쓰기</button></a>
+    <a href="{% url 'logout' %}"><button>로그아웃</button></a>
+    <a href="{% url 'modify' %}"><button>정보수정</button></a>
+    {% else %}
+    <a href="{% url 'signup' %}"><button>회원가입</button></a>
+    <a href="{% url 'login' %}"><button>로그인</button></a>
+    {% endif %}
+
+    
+    <br>
+    {% for obj in post %}
+      <div style="border-bottom:2px solid #111111;">
+          <a href="{% url 'detail' obj.id %}">
+          <h3>{{obj.title}}</h3>
+          <br>
+          <p>{{obj.pub_date}}</p>
+          <br>
+          <p>{{obj.content}}</p>
+          <br>
+          <p>{{obj.like_num}}</p>
+          </a>
+      </div>
+    {% endfor %}
+</body>
+</html>
