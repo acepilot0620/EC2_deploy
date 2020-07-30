@@ -61,13 +61,12 @@ def modify_user(request):
     now_user = Account.objects.get(user = request.user)
     context = {'account':now_user}
     if request.method == 'POST':
-        user_id = request.POST.get('id')
         pw1 = request.POST.get('password1')
         pw2 = request.POST.get('password2') 
         email = request.POST.get('email')
         nickname = request.POST.get('nickname')
 
-        if user_id == ""or nickname =="" or email == "" or pw1 == "" or pw2 == "":
+        if nickname =="" or email == "" or pw1 == "" or pw2 == "":
             messages.info(request,"모든 항목을 채워주세요.")
             return redirect('signup')
         
@@ -78,7 +77,6 @@ def modify_user(request):
 
         
         user = now_user.user
-        user.username = user_id
         user.password = pw1
         user.save()
         account = Account(user=user, email=email, nickname=nickname)

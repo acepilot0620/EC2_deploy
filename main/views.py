@@ -55,8 +55,7 @@ def delete_post(request,post_id):
 
 def post_like(request,post_id):
     post = get_object_or_404(Post, id= post_id)
-    user = request.user
-    account = Account.objects.get(user=user)
+    account = Account.objects.get(user=request.user)
 
     check_like_post = account.like_post.filter(id=post_id)
 
